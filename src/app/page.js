@@ -3,23 +3,6 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [permission, setPermission] = useState(Notification.permission);
-
-  const requestNotificationPermission = () => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        setPermission(permission);
-        if (permission === "granted") {
-          new Notification("Notification enabled!", {
-            body: "You will now receive notifications.",
-          });
-        }
-      });
-    } else {
-      alert("Notifications are not supported by your browser.");
-    }
-  };
-
   const handleLoginOrRegister = () => {
     // Navigate to the login or registration page
     window.location.href = "/auth"; // Adjust the path as needed
@@ -31,14 +14,6 @@ export default function Home() {
       <button style={styles.button} onClick={handleLoginOrRegister}>
         Log In or Register
       </button>
-      {permission !== "granted" && (
-        <button
-          style={styles.permissionButton}
-          onClick={requestNotificationPermission}
-        >
-          Enable Notifications
-        </button>
-      )}
     </div>
   );
 }
